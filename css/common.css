@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
 * {
     margin: 0;
@@ -7,11 +7,11 @@
 }
 
 :root {
-    font-size: 18px;
-    font-family: 'Work Sans', sans-serif;
-    --text-color:  #505155;
+    font-family: 'DotGothic16', sans-serif;
+    --text-color: black;
     --border-color: #ccc;
     --ui-brand-color: #f5a623;
+    --background-color: rgb(50, 206, 211);
 }
 
 img {
@@ -19,46 +19,8 @@ img {
     width: 100%;
 }
 
-/*
-h1 {
-    color: var(--text-color);
+
+.container {
+    max-width: 980px;
+    margin: auto;
 }
-
-.ui-brand {
-    color: var(--ui-brand-color);
-}
-
-.footer h2 {
-    color: var(--text-color);
-}
-
-.footer h2 span {
-    color: red;
-}
-
-p:hover {
-    color: var(--ui-brand-color);
-}
-
-p::first-letter {
-    font-size: 2rem;
-}
-
-
-selector {
-    property: value;
-    another-property: value;
-}
-
-
-.header-banner__h1 {
-    color: red;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-#contacts > h2 {
-    color: green;
-}
-
-*/
