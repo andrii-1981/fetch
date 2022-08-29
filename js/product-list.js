@@ -1,37 +1,16 @@
-(function() {
+(async function() {
+  
+  let rate = 1; 
+  let currencies;
+  const response = await fetch('api/products.json');
+  const products = await response.json();
+  renderProducts(products);
 
-    const products = [
-        {
-            id: "1",
-            title: "Baby Yoda",
-            description: "Baby Yoda Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro fuga autem possimus eveniet facere, non minus magnam obcaecati, tenetur recusandae, corporis itaque suscipit. Vero illo nulla asperiores laudantium tempore porro!",
-            image: "img/baby-yoda.svg",
-            price: 10.99
-        },
-        {
-            id: "2",
-            title: "Banana",
-            description: "Banana Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro fuga autem possimus eveniet facere, non minus magnam obcaecati, tenetur recusandae, corporis itaque suscipit. Vero illo nulla asperiores laudantium tempore porro!",
-            image: "img/banana.svg",
-            price: 11.99
-        },
-        {
-            id: "3",
-            title: "Girl",
-            description: "Girl Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro fuga autem possimus eveniet facere, non minus magnam obcaecati, tenetur recusandae, corporis itaque suscipit. Vero illo nulla asperiores laudantium tempore porro!",
-            image: "img/girl.svg",
-            price: 12.99
-        },
-        {
-            id: "4",
-            title: "Viking",
-            description: "Viking Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro fuga autem possimus eveniet facere, non minus magnam obcaecati, tenetur recusandae, corporis itaque suscipit. Vero illo nulla asperiores laudantium tempore porro!",
-            image: "img/viking.svg",
-            price: 11.99
-        }
-    ];
+    // fetch('api/products.json')
+    //   .then( response => response.json() )
+    //   .then( products => renderProducts(products) );
 
-    function renderProducts(products) {
+    function renderProducts() {
         const productContainer = document.querySelector('.main-products__list');
         productContainer.innerHTML = '';
         for (const product of products) {
@@ -49,14 +28,23 @@
                   Info
                 </button>
                 <button class="product-card__buttons-buy button button-card">
-                  Buy - ${product.price}
+                  Buy - ${(product.price * rate).toFixed(2)}
                 </button>
               </div>
             </article>`;
         }
     }
 
-    renderProducts(products);
+    async function convertCurrency() {
+      const convertTo = document.querySelector('.currency').value;
+      if (!currencies) {
+        const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+        currencies = await response.json();
+      }
+      rate = currencies.rates[convertTo];
+      renderProducts();
+    }
 
+    document.querySelector('.convert-currency').addEventListener('click', convertCurrency);
 
 })();
